@@ -8,6 +8,7 @@ const AuthenticationForm = (props) => {
     console.log(values)
     axios.post('http://localhost:8000/api/users/login', values)
       .then(() => {
+        console.log(values)
         message.success('Success')
         switchModal()
       })

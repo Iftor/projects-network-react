@@ -14,9 +14,9 @@ function App() {
         <Route path="/" element={<PageLayout />}>
           <Route index element={<MainPage />}/>
           <Route path="communities" element={<CommunitiesPage />}/>
-          <Route path=":community_custom_id" element={<CommunityItem />}/>
+          <Route path=":communityId" element={<CommunityItem />}/>
           <Route path="projects" element={<UserProjectList />} />
-          <Route path=":community_custom_id/:project_custom_id" element={<ProjectItem />} />
+          <Route path=":communityCustomId/:projectCustomId" element={<ProjectItem />} />
           <Route path="registration" element={<RegistrationForm />} />
         </Route>
       </Routes>

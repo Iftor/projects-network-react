@@ -57,7 +57,7 @@ const CommunitiesPage = () => {
             <List.Item key={item.custom_id}>
               <List.Item.Meta
                 title={
-                  <Link to="/">{item.name}</Link>
+                  <Link to={`/${item.id}`}>{item.name}</Link>
                 }
                 description={item.description}
               />

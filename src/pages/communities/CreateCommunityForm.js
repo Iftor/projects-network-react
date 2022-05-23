@@ -1,9 +1,15 @@
-import { Button, Checkbox, Form, Input } from 'antd';
+import {Button, Checkbox, Form, Input, message} from 'antd';
 import axios from "axios";
 
 const CreateCommunityForm = (props) => {
+  const { switchModal } = props
   const onFinish = (values) => {
-    axios.post()
+    axios.post('http://localhost:8000/api/communities/', values)
+      .then(() => {
+        message.success('Success')
+        switchModal()
+      })
+      .catch(() => message.error('Something\'s wrong'))
   };
 
   return (
@@ -25,19 +31,6 @@ const CreateCommunityForm = (props) => {
       </Form.Item>
 
       <Form.Item
-        label="Custom id"
-        name="custom_id"
-        rules={[
-          {
-            required: true,
-            message: 'Please input custom id!',
-          },
-        ]}
-      >
-        <Input />
-      </Form.Item>
-
-      <Form.Item
         label="Description"
         name="description"
       >
@@ -50,13 +43,7 @@ const CreateCommunityForm = (props) => {
           span: 16,
         }}
       >
-        <Button
-          type="primary"
-          htmlType="submit"
-          onClick={() => {
-            props.switchModal()
-          }}
-        >
+        <Button type="primary" htmlType="submit">
           Create
         </Button>
       </Form.Item>
