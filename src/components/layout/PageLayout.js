@@ -1,59 +1,66 @@
-import { Link, Outlet } from "react-router-dom"
-import {Breadcrumb, Layout, Menu} from 'antd';
-const {Header, Content, Footer} = Layout;
+import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
+import { Layout, Menu } from 'antd';
+import React from 'react';
+import { Routes, Route, Outlet, Link } from 'react-router-dom';
+const { Header, Content, Footer, Sider } = Layout;
 
 const PageLayout = () => {
   return (
     <Layout>
-      <Header
-        style={{
-          position: 'fixed',
-          zIndex: 1,
-          width: '100%',
+      <Sider
+        breakpoint="lg"
+        collapsedWidth="0"
+        onBreakpoint={(broken) => {
+          console.log(broken);
+        }}
+        onCollapse={(collapsed, type) => {
+          console.log(collapsed, type);
         }}
       >
         <div className="logo" />
         <Menu
           theme="dark"
-          mode="horizontal"
-          defaultSelectedKeys={['2']}
-          items={new Array(3).fill(null).map((_, index) => ({
-            key: String(index + 1),
-            label: `nav ${index + 1}`,
-          }))}
+          mode="inline"
+          defaultSelectedKeys={['4']}
+          items={[UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].map(
+            (icon, index) => ({
+              key: String(index + 1),
+              icon: React.createElement(icon),
+              label: `nav ${index + 1}`,
+            }),
+          )}
         />
-      </Header>
-      <Content
-        className="site-layout"
-        style={{
-          padding: '0 50px',
-          marginTop: 64,
-        }}
-      >
-        <Breadcrumb
+      </Sider>
+      <Layout>
+        <Header
+          className="site-layout-sub-header-background"
           style={{
-            margin: '16px 0',
+            padding: 0,
+          }}
+        />
+        <Content
+          style={{
+            margin: '24px 16px 0',
           }}
         >
-          {/*<Breadcrumb.Item>Home</Breadcrumb.Item>*/}
-        </Breadcrumb>
-        <div
-          className="site-layout-background"
+          <div
+            className="site-layout-background"
+            style={{
+              padding: 24,
+              minHeight: 360,
+            }}
+          >
+            <Outlet />
+          </div>
+        </Content>
+        <Footer
           style={{
-            padding: 24,
-            minHeight: 380,
+            textAlign: 'center',
           }}
         >
-          <Outlet />
-        </div>
-      </Content>
-      <Footer
-        style={{
-          textAlign: 'center',
-        }}
-      >
-        Ant Design ©2018 Created by Ant UED
-      </Footer>
+          Ant Design ©2018 Created by Ant UED
+        </Footer>
+      </Layout>
     </Layout>
   )
 }

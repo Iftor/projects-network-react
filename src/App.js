@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import PageLayout from "./components/layout/PageLayout";
-import Registration from "./routes/auth/Registration";
+import RegistrationForm from "./components/auth/RegistrationForm";
 import CommunityItem from "./routes/communities/CommunityItem";
 import CommunitiesPage from "./routes/communities/CommunitiesPage";
 import MainPage from "./routes/main/MainPage";
@@ -17,7 +17,7 @@ function App() {
           <Route path=":community_custom_id" element={<CommunityItem />}/>
           <Route path="projects" element={<UserProjectList />} />
           <Route path=":community_custom_id/:project_custom_id" element={<ProjectItem />} />
-          <Route path="registration" element={<Registration />} />
+          <Route path="registration" element={<RegistrationForm />} />
         </Route>
       </Routes>
     </div>

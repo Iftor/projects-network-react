@@ -1,18 +1,9 @@
 import {
-  AutoComplete,
   Button,
-  Cascader,
-  Checkbox,
-  Col,
   Form,
   Input,
-  InputNumber,
-  Row,
-  Select,
 } from 'antd';
 import axios from 'axios';
-import { useState } from 'react';
-const { Option } = Select;
 
 const formItemLayout = {
   labelCol: {
@@ -45,7 +36,7 @@ const tailFormItemLayout = {
   },
 };
 
-const Registration = () => {
+const RegistrationForm = () => {
   const [form] = Form.useForm();
 
   const onFinish = (values) => {
@@ -76,7 +67,7 @@ const Registration = () => {
           },
         ]}
       >
-        <Input />
+        <Input/>
       </Form.Item>
       <Form.Item
         name="email"
@@ -92,7 +83,7 @@ const Registration = () => {
           },
         ]}
       >
-        <Input />
+        <Input/>
       </Form.Item>
       <Form.Item
         name="first_name"
@@ -105,7 +96,7 @@ const Registration = () => {
           },
         ]}
       >
-        <Input />
+        <Input/>
       </Form.Item>
       <Form.Item
         name="last_name"
@@ -118,7 +109,7 @@ const Registration = () => {
           },
         ]}
       >
-        <Input />
+        <Input/>
       </Form.Item>
       <Form.Item
         name="password"
@@ -131,7 +122,7 @@ const Registration = () => {
         ]}
         hasFeedback
       >
-        <Input.Password />
+        <Input.Password/>
       </Form.Item>
 
       <Form.Item
@@ -144,7 +135,7 @@ const Registration = () => {
             required: true,
             message: 'Please confirm your password!',
           },
-          ({ getFieldValue }) => ({
+          ({getFieldValue}) => ({
             validator(_, value) {
               if (!value || getFieldValue('password') === value) {
                 return Promise.resolve();
@@ -155,7 +146,7 @@ const Registration = () => {
           }),
         ]}
       >
-        <Input.Password />
+        <Input.Password/>
       </Form.Item>
       <Form.Item {...tailFormItemLayout}>
         <Button type="primary" htmlType="submit">
@@ -166,4 +157,4 @@ const Registration = () => {
   );
 }
 
-export default Registration
+export default RegistrationForm
