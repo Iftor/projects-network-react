@@ -1,68 +1,50 @@
-import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
-import { Layout, Menu } from 'antd';
-import React from 'react';
-import { Routes, Route, Outlet, Link } from 'react-router-dom';
-const { Header, Content, Footer, Sider } = Layout;
+import { Outlet } from 'react-router-dom';
+import { Breadcrumb, Layout, Menu } from 'antd';
+const { Header, Content, Footer } = Layout;
 
-const PageLayout = () => {
-  return (
-    <Layout>
-      <Sider
-        breakpoint="lg"
-        collapsedWidth="0"
-        onBreakpoint={(broken) => {
-          console.log(broken);
-        }}
-        onCollapse={(collapsed, type) => {
-          console.log(collapsed, type);
+const PageLayout = () => (
+  <Layout className="layout">
+    <Header>
+      <div className="logo" />
+      <Menu
+        theme="dark"
+        mode="horizontal"
+        defaultSelectedKeys={['2']}
+        items={new Array(15).fill(null).map((_, index) => {
+          const key = index + 1;
+          return {
+            key,
+            label: `nav ${key}`,
+          };
+        })}
+      />
+    </Header>
+    <Content
+      style={{
+        padding: '0 50px',
+      }}
+    >
+      <Breadcrumb
+        style={{
+          margin: '16px 0',
         }}
       >
-        <div className="logo" />
-        <Menu
-          theme="dark"
-          mode="inline"
-          defaultSelectedKeys={['4']}
-          items={[UserOutlined, VideoCameraOutlined, UploadOutlined, UserOutlined].map(
-            (icon, index) => ({
-              key: String(index + 1),
-              icon: React.createElement(icon),
-              label: `nav ${index + 1}`,
-            }),
-          )}
-        />
-      </Sider>
-      <Layout>
-        <Header
-          className="site-layout-sub-header-background"
-          style={{
-            padding: 0,
-          }}
-        />
-        <Content
-          style={{
-            margin: '24px 16px 0',
-          }}
-        >
-          <div
-            className="site-layout-background"
-            style={{
-              padding: 24,
-              minHeight: 360,
-            }}
-          >
-            <Outlet />
-          </div>
-        </Content>
-        <Footer
-          style={{
-            textAlign: 'center',
-          }}
-        >
-          Ant Design ©2018 Created by Ant UED
-        </Footer>
-      </Layout>
-    </Layout>
-  )
-}
+        {/*<Breadcrumb.Item>Home</Breadcrumb.Item>*/}
+        {/*<Breadcrumb.Item>List</Breadcrumb.Item>*/}
+        {/*<Breadcrumb.Item>App</Breadcrumb.Item>*/}
+      </Breadcrumb>
+      <div className="site-layout-content">
+        <Outlet />
+      </div>
+    </Content>
+    <Footer
+      style={{
+        textAlign: 'center',
+      }}
+    >
+      Ant Design ©2018 Created by Ant UED
+    </Footer>
+  </Layout>
+);
 
-export default PageLayout
+export default PageLayout;
