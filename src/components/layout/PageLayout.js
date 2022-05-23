@@ -1,4 +1,4 @@
-import { Outlet } from 'react-router-dom';
+import {Link, Outlet} from 'react-router-dom';
 import {Breadcrumb, Button, Layout, Menu} from 'antd';
 import AuthenticationModal from "../auth/authentication/AuthenticationModal";
 const { Header, Content, Footer } = Layout;
@@ -8,6 +8,9 @@ const PageLayout = () => (
     <Header>
       <div className="logo" />
       <AuthenticationModal />
+      <Button type="primary">
+        <Link to="communities">Communities</Link>
+      </Button>
     </Header>
     <Content
       style={{
@@ -32,7 +35,7 @@ const PageLayout = () => (
         textAlign: 'center',
       }}
     >
-      Ant Design ©2018 Created by Ant UED
+      SUD ©2022 Created by MIREA
     </Footer>
   </Layout>
 );

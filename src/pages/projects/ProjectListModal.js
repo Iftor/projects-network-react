@@ -1,8 +1,9 @@
 import { Button, Modal } from 'antd';
 import { useState } from 'react';
-import CreateCommunityForm from "./CreateCommunityForm";
+import ProjectList from "./ProjectList";
 
-const CreateCommunityModal = () => {
+const CreateCommunityModal = (props) => {
+  const {communityId} = props
   const [visible, setVisible] = useState(false);
 
   const switchModal = () => {
@@ -12,7 +13,7 @@ const CreateCommunityModal = () => {
   return (
     <>
       <Button type="primary" onClick={switchModal}>
-        Create community
+        Projects
       </Button>
       <Modal
         visible={visible}
@@ -21,7 +22,7 @@ const CreateCommunityModal = () => {
         onOk={switchModal}
         footer={null}
       >
-        <CreateCommunityForm switchModal={switchModal}/>
+        <ProjectList communityId={communityId}/>
       </Modal>
     </>
   );
