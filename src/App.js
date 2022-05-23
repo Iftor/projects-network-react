@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import PageLayout from "./components/layout/PageLayout";
-import RegistrationForm from "./components/auth/RegistrationForm";
+import RegistrationForm from "./components/auth/registration/RegistrationForm";
 import CommunityItem from "./routes/communities/CommunityItem";
 import CommunitiesPage from "./routes/communities/CommunitiesPage";
 import MainPage from "./routes/main/MainPage";

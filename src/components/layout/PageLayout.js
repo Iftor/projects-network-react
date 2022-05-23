@@ -1,23 +1,13 @@
 import { Outlet } from 'react-router-dom';
-import { Breadcrumb, Layout, Menu } from 'antd';
+import {Breadcrumb, Button, Layout, Menu} from 'antd';
+import AuthenticationModal from "../auth/authentication/AuthenticationModal";
 const { Header, Content, Footer } = Layout;
 
 const PageLayout = () => (
   <Layout className="layout">
     <Header>
       <div className="logo" />
-      <Menu
-        theme="dark"
-        mode="horizontal"
-        defaultSelectedKeys={['2']}
-        items={new Array(15).fill(null).map((_, index) => {
-          const key = index + 1;
-          return {
-            key,
-            label: `nav ${key}`,
-          };
-        })}
-      />
+      <AuthenticationModal />
     </Header>
     <Content
       style={{
