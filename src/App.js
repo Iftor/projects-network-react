@@ -1,5 +1,5 @@
 import { Route, Routes } from "react-router-dom";
-import Header from "./components/header/Header";
+import PageLayout from "./components/layout/PageLayout";
 import Registration from "./routes/auth/Registration";
 import CommunityItem from "./routes/communities/CommunityItem";
 import CommunityList from "./routes/communities/CommunityList";
@@ -11,7 +11,7 @@ function App() {
   return (
     <div className="App">
       <Routes>
-        <Route path="/" element={<Header />}>
+        <Route path="/" element={<PageLayout />}>
           <Route index element={<MainPage />}/>
           <Route path="communities" element={<CommunityList />}/>
           <Route path=":community_custom_id" element={<CommunityItem />}/>
