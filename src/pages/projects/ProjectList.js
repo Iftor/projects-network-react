@@ -1,12 +1,11 @@
 import {message, Table} from "antd";
 import {useEffect, useState} from "react";
 import axios from "axios";
-import {useParams} from "react-router-dom";
+import {Link, useParams} from "react-router-dom";
 
 const ProjectList = (props) => {
   const {communityId} = props
   const [projects, setProjects] = useState([])
-  console.log(`http://localhost:8000/api/projects/communities/${communityId}`)
   useEffect(() => {
     axios.get(`http://localhost:8000/api/projects/communities/${communityId}`)
       .then(res => setProjects(res.data))
@@ -18,6 +17,7 @@ const ProjectList = (props) => {
       title: 'Name',
       dataIndex: 'name',
       key: 'name',
+      render: (text, record) => <Link to={`/${communityId}/${record.id}`}>{text}</Link>,
     },
     {
       title: 'Description',

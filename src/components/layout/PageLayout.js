@@ -8,6 +8,9 @@ const PageLayout = () => (
     <Header>
       <div className="logo" />
       <AuthenticationModal />
+      <Link to="registration" style={{marginRight: 20}}>
+        <Button type="primary">Sign up</Button>
+      </Link>
       <Button type="primary">
         <Link to="communities">Communities</Link>
       </Button>

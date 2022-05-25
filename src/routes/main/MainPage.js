@@ -1,7 +1,11 @@
+import {Typography} from "antd";
+const { Title } = Typography;
+
+
 const MainPage = () => {
   return (
     <>
-      5
+      <Title>Main page</Title>
     </>
   )
 }

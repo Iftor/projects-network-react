@@ -16,7 +16,7 @@ function App() {
           <Route path="communities" element={<CommunitiesPage />}/>
           <Route path=":communityId" element={<CommunityItem />}/>
           <Route path="projects" element={<UserProjectList />} />
-          <Route path=":communityCustomId/:projectCustomId" element={<ProjectItem />} />
+          <Route path=":communityId/:projectId" element={<ProjectItem />} />
           <Route path="registration" element={<RegistrationForm />} />
         </Route>
       </Routes>
