@@ -1,5 +1,7 @@
 import axios from 'axios';
 import {
+  REGISTER_SUCCESS,
+  REGISTER_FAIL,
   LOGIN_SUCCESS,
   LOGIN_FAIL,
   LOGOUT_SUCCESS,
@@ -7,101 +9,83 @@ import {
   AUTHENTICATED_SUCCESS,
   AUTHENTICATED_FAIL,
 } from './types';
+import {message} from "antd";
+
 
 export const checkAuthenticated = () => async dispatch => {
-  const config = {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json'
-    }
-  };
-
-  try {
-    const res = await axios.get(`${process.env.REACT_APP_API_URL}/accounts/authenticated`, config);
-
-    if (res.data.error || res.data.isAuthenticated === 'error') {
+  const res = await axios.get('http://localhost:8000/api/users/authenticated')
+    .then((res) => {
+      if (res.data.error || res.data.isAuthenticated === 'false') {
+        dispatch({
+          type: AUTHENTICATED_FAIL,
+          payload: false
+        });
+      }
+      else if (res.data.isAuthenticated === 'true') {
+        dispatch({
+          type: AUTHENTICATED_SUCCESS,
+          payload: true
+        });
+      }
+    })
+    .catch(() => {
       dispatch({
         type: AUTHENTICATED_FAIL,
         payload: false
       });
-    }
-    else if (res.data.isAuthenticated === 'success') {
-      dispatch({
-        type: AUTHENTICATED_SUCCESS,
-        payload: true
-      });
-    }
-    else {
-      dispatch({
-        type: AUTHENTICATED_FAIL,
-        payload: false
-      });
-    }
-  } catch(err) {
-    dispatch({
-      type: AUTHENTICATED_FAIL,
-      payload: false
-    });
-  }
+    })
 };
 
-export const login = (username, password) => async dispatch => {
-  const config = {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    }
-  };
 
-  const body = JSON.stringify({ username, password });
-
-  try {
-    const res = await axios.post(`${process.env.REACT_APP_API_URL}/accounts/login`, body, config);
-
-    if (res.data.success) {
+export const register = (formValues, navigate) => async dispatch => {
+  await axios.post('http://localhost:8000/api/auth/users/', formValues)
+    .then(() => {
       dispatch({
-        type: LOGIN_SUCCESS
+        type: REGISTER_SUCCESS
       });
+      message.success('Success');
+      navigate('/');
+    })
+    .catch(() => {
+      dispatch({
+        type: REGISTER_FAIL
+      })
+      message.error('Something\'s wrong. Try again')
+    })
+};
 
-    } else {
+
+export const login = (formValues, switchModal) => async dispatch => {
+  await axios.post('http://localhost:8000/api/users/login', formValues)
+    .then((res) => {
+      dispatch({
+        type: LOGIN_SUCCESS,
+        payload: res.data.username,
+      });
+      message.success('Success');
+      switchModal();
+    })
+    .catch(() => {
       dispatch({
         type: LOGIN_FAIL
       });
-    }
-  } catch(err) {
-    dispatch({
-      type: LOGIN_FAIL
-    });
-  }
+      message.error('Incorrect username or password');
+    })
 };
 
-export const logout = () => async dispatch => {
-  const config = {
-    headers: {
-      'Accept': 'application/json',
-      'Content-Type': 'application/json',
-    }
-  };
-
-  const body = JSON.stringify({
-    'withCredentials': true
-  });
-
-  try {
-    const res = await axios.post(`${process.env.REACT_APP_API_URL}/accounts/logout`, body, config);
-
-    if (res.data.success) {
+export const logout = (navigate) => async dispatch => {
+  await axios.get('http://localhost:8000/api/users/logout')
+    .then(() => {
       dispatch({
         type: LOGOUT_SUCCESS
       });
-    } else {
+      message.success('Success');
+      navigate('/');
+    })
+    .catch(() => {
       dispatch({
         type: LOGOUT_FAIL
       });
-    }
-  } catch(err) {
-    dispatch({
-      type: LOGOUT_FAIL
-    });
-  }
+      message.error('Error while logging out');
+    })
 };

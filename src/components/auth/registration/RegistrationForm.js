@@ -4,6 +4,9 @@ import {
   Input,
 } from 'antd';
 import axios from 'axios';
+import { connect, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { register } from "../../../actions/auth"
 
 const formItemLayout = {
   labelCol: {
@@ -36,12 +39,14 @@ const tailFormItemLayout = {
   },
 };
 
-const RegistrationForm = () => {
+
+const RegistrationForm = ({ register }) => {
   const [form] = Form.useForm();
+  let navigate = useNavigate();
+
 
   const onFinish = (values) => {
-    console.log('Received values of form: ', values);
-    axios.post('http://localhost:8000/api/auth/users/', values)
+    register(values, navigate);
   };
 
   return (
@@ -126,7 +131,7 @@ const RegistrationForm = () => {
       </Form.Item>
 
       <Form.Item
-        name="confirm"
+        name="confirm_password"
         label="Confirm Password"
         dependencies={['password']}
         hasFeedback
@@ -157,4 +162,4 @@ const RegistrationForm = () => {
   );
 }
 
-export default RegistrationForm
+export default connect(null, { register })(RegistrationForm);

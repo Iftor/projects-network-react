@@ -1,18 +1,12 @@
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input, message } from 'antd';
-import axios from "axios";
+import { login } from "../../../actions/auth";
+import {connect} from "react-redux";
 
 const AuthenticationForm = (props) => {
-  const { switchModal } = props;
+  const { switchModal, login } = props;
   const onFinish = (values) => {
-    console.log(values)
-    axios.post('http://localhost:8000/api/users/login', values)
-      .then(() => {
-        console.log(values)
-        message.success('Success')
-        switchModal()
-      })
-      .catch(() => message.error('The username or password is incorrect'))
+    login(values, switchModal);
   };
 
   return (
@@ -60,4 +54,4 @@ const AuthenticationForm = (props) => {
   );
 };
 
-export default AuthenticationForm;
+export default connect(null, { login })(AuthenticationForm);
