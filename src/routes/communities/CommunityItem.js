@@ -7,7 +7,6 @@ const { Title, Text } = Typography;
 
 const CommunityItem = () => {
   let { communityId } = useParams()
-  console.log(communityId)
   const [community, setCommunity] = useState({})
   useEffect(() => {
     axios.get(`http://localhost:8000/api/communities/${communityId}`)

@@ -13,18 +13,21 @@ import {message} from "antd";
 
 
 export const checkAuthenticated = () => async dispatch => {
-  const res = await axios.get('http://localhost:8000/api/users/authenticated')
+  await axios.get('http://localhost:8000/api/users/authenticated')
     .then((res) => {
-      if (res.data.error || res.data.isAuthenticated === 'false') {
+      if (res.data.error || res.data.authenticated === 'false') {
         dispatch({
           type: AUTHENTICATED_FAIL,
           payload: false
         });
       }
-      else if (res.data.isAuthenticated === 'true') {
+      else if (res.data.authenticated === 'true') {
         dispatch({
           type: AUTHENTICATED_SUCCESS,
-          payload: true
+          payload: {
+            isAuthenticated: true,
+            username: res.data.username
+          },
         });
       }
     })

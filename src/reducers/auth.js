@@ -25,6 +25,11 @@ export default function(state = initialState, action) {
       }
     case REGISTER_FAIL:
     case AUTHENTICATED_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: payload.isAuthenticated,
+        username: payload.username
+      }
     case AUTHENTICATED_FAIL:
       return {
         ...state,
@@ -38,6 +43,10 @@ export default function(state = initialState, action) {
       }
     case LOGIN_FAIL:
     case LOGOUT_SUCCESS:
+      return {
+        ...state,
+        isAuthenticated: false,
+      }
     case LOGOUT_FAIL:
     default:
       return state
