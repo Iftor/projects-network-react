@@ -12,10 +12,15 @@ const ContainerHeight = 400;
 
 const CommunitiesPage = () => {
   const [communities, setCommunities] = useState([])
+  const [userParticipation, setUserParticipation] = useState(false);
 
   useEffect(() => {
     appendData()
-  }, [])
+  }, [userParticipation])
+
+  const switchUserParticipation = () => {
+    setUserParticipation(!userParticipation)
+  }
 
   const appendData = () => {
     axios.get('http://localhost:8000/api/communities/')
@@ -31,10 +36,11 @@ const CommunitiesPage = () => {
 
   const participationAction = (item) => {
     return item.auth_user_participation? (
-    <LeaveCommunity communityId={item.id}/>
-      ):(
-        <JoinCommunity communityId={item.id}/>
-  )}
+      <LeaveCommunity communityId={item.id} switchUserParticipation={switchUserParticipation}/>
+    ):(
+      <JoinCommunity communityId={item.id} switchUserParticipation={switchUserParticipation}/>
+    )
+  }
 
   return (
     <>

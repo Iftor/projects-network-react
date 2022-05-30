@@ -1,10 +1,10 @@
 import {Button} from "antd";
 import axios from "axios";
 
-const JoinCommunity = ({ communityId }) => {
+const JoinCommunity = ({ communityId, switchUserParticipation }) => {
   const joinCommunity = () => {
     axios.post(`http://localhost:8000/api/communities/join-community/${communityId}`)
-      .then(() => {})
+      .then(() => switchUserParticipation())
       .catch(() => {})
   }
 

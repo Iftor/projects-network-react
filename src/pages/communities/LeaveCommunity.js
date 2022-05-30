@@ -1,10 +1,10 @@
 import {Button} from "antd";
 import axios from "axios";
 
-const LeaveCommunity = ({ communityId }) => {
+const LeaveCommunity = ({ communityId, switchUserParticipation }) => {
   const leaveCommunity = () => {
     axios.post(`http://localhost:8000/api/communities/leave-community/${communityId}`)
-      .then(() => {})
+      .then(() => switchUserParticipation())
       .catch(() => {})
   }
 
