@@ -1,11 +1,12 @@
 import axios from "axios";
-import {  List, Button, Typography, PageHeader  } from 'antd';
+import {List, Button, Typography, PageHeader} from 'antd';
 import VirtualList from 'rc-virtual-list';
 import {  useEffect, useState  } from 'react';
 import { Link } from 'react-router-dom';
 import CreateCommunityModal from "../../pages/communities/CreateCommunityModal";
 import JoinCommunity from "../../pages/communities/JoinCommunity";
 import LeaveCommunity from "../../pages/communities/LeaveCommunity";
+import DeleteCommunity from "../../pages/communities/DeleteCommunity";
 const { Title } = Typography;
 
 const ContainerHeight = 400;
@@ -25,7 +26,6 @@ const CommunitiesPage = () => {
   const appendData = () => {
     axios.get('http://localhost:8000/api/communities/')
       .then(res => setCommunities(res.data))
-      .catch(error => console.log(error))
   };
 
   const onScroll = (e) => {
@@ -35,11 +35,19 @@ const CommunitiesPage = () => {
   };
 
   const participationAction = (item) => {
-    return item.auth_user_participation? (
-      <LeaveCommunity communityId={item.id} switchUserParticipation={switchUserParticipation}/>
-    ):(
-      <JoinCommunity communityId={item.id} switchUserParticipation={switchUserParticipation}/>
-    )
+    if (item.auth_user_is_creator) {
+      return (
+        <DeleteCommunity communityId={item.id} switchUserParticipation={switchUserParticipation}/>
+      )
+    } else if (item.auth_user_participation) {
+      return(
+        <LeaveCommunity communityId={item.id} switchUserParticipation={switchUserParticipation}/>
+      )
+    } else {
+      return (
+        <JoinCommunity communityId={item.id} switchUserParticipation={switchUserParticipation}/>
+      )
+    }
   }
 
   return (
@@ -67,6 +75,7 @@ const CommunitiesPage = () => {
                 }
                 description={item.description}
               />
+              <span style={{marginRight: '40px'}}>Participants {item.participants.length}</span>
               {participationAction(item)}
             </List.Item>
           )}
