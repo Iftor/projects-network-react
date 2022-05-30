@@ -4,16 +4,23 @@ import VirtualList from 'rc-virtual-list';
 import {  useEffect, useState  } from 'react';
 import { Link } from 'react-router-dom';
 import CreateCommunityModal from "../../pages/communities/CreateCommunityModal";
+import JoinCommunity from "../../pages/communities/JoinCommunity";
+import LeaveCommunity from "../../pages/communities/LeaveCommunity";
 const { Title } = Typography;
 
 const ContainerHeight = 400;
 
 const CommunitiesPage = () => {
   const [communities, setCommunities] = useState([])
+  const [userParticipation, setUserParticipation] = useState(false);
 
   useEffect(() => {
     appendData()
-  }, [])
+  }, [userParticipation])
+
+  const switchUserParticipation = () => {
+    setUserParticipation(!userParticipation)
+  }
 
   const appendData = () => {
     axios.get('http://localhost:8000/api/communities/')
@@ -21,20 +28,19 @@ const CommunitiesPage = () => {
       .catch(error => console.log(error))
   };
 
-  // const appendData = () => {
-  //   fetch(fakeDataUrl)
-  //     .then((res) => res.json())
-  //     .then((body) => {
-  //       setData(data.concat(body.results));
-  //       message.success(`${body.results.length} more items loaded!`);
-  //     });
-  // };
-
   const onScroll = (e) => {
     if (e.currentTarget.scrollHeight - e.currentTarget.scrollTop === ContainerHeight) {
       appendData();
     }
   };
+
+  const participationAction = (item) => {
+    return item.auth_user_participation? (
+      <LeaveCommunity communityId={item.id} switchUserParticipation={switchUserParticipation}/>
+    ):(
+      <JoinCommunity communityId={item.id} switchUserParticipation={switchUserParticipation}/>
+    )
+  }
 
   return (
     <>
@@ -54,18 +60,14 @@ const CommunitiesPage = () => {
           onScroll={onScroll}
         >
           {(item) => (
-            <List.Item key={item.custom_id}>
+            <List.Item key={item.id}>
               <List.Item.Meta
                 title={
                   <Link to={`/${item.id}`}>{item.name}</Link>
                 }
                 description={item.description}
               />
-              <div>
-                <Button type="primary" ghost>
-                  Join
-                </Button>
-              </div>
+              {participationAction(item)}
             </List.Item>
           )}
         </VirtualList>
