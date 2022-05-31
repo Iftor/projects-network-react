@@ -15,6 +15,7 @@ const LeaveCommunity = ({ communityId, switchUserParticipation }) => {
         ghost
         danger
         onClick={leaveCommunity}
+        style={{minWidth: '70px'}}
       >
         Leave
       </Button>

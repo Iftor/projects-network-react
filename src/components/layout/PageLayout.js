@@ -12,7 +12,7 @@ const PageLayout = ({ checkAuthenticated }) => {
   }, [])
 
   return (
-    <Layout className="layout">
+    <Layout className="layout" style={{height: '95vh'}}>
       <Header>
         <Navbar/>
       </Header>
@@ -37,6 +37,11 @@ const PageLayout = ({ checkAuthenticated }) => {
       <Footer
         style={{
           textAlign: 'center',
+          position: 'absolute',
+          left: '0',
+          bottom: '0',
+          width: '100%',
+          height: '80px'
         }}
       >
         SUD ©2022 Created by MIREA

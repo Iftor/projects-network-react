@@ -14,6 +14,7 @@ const JoinCommunity = ({ communityId, switchUserParticipation }) => {
         type="primary"
         ghost
         onClick={joinCommunity}
+        style={{minWidth: '70px'}}
       >
         Join
       </Button>
