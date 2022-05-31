@@ -25,7 +25,7 @@ const CommunitiesPage = () => {
 
   const appendData = () => {
     axios.get('http://localhost:8000/api/communities/')
-      .then(res => setCommunities(res.data))
+      .then(res => {setCommunities(res.data)})
   };
 
   const onScroll = (e) => {

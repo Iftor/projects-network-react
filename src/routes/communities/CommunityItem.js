@@ -14,10 +14,11 @@ const CommunityItem = () => {
   const [community, setCommunity] = useState({})
 
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/communities/${communityId}`)
-      .then(res => setCommunity(res.data))
+    axios.get(`http://localhost:8000/api/communities/${communityId}/`)
+      .then(res => {
+        setCommunity(res.data)})
       .catch(() => message.error('Failed to load data'))
-  }, [communityId])
+  }, [communityId, userParticipation])
 
   const getLength = (arr) => {
     try {
@@ -32,7 +33,7 @@ const CommunityItem = () => {
   const participationAction = (obj) => {
     if (obj) {
       if (obj.auth_user_is_creator) {
-        return (<></>)
+        return null
       } else if (obj.auth_user_participation) {
         return (
           <LeaveCommunity communityId={obj.id} switchUserParticipation={switchUserParticipation}/>
