@@ -6,6 +6,7 @@ import ProjectListModal from "../../pages/projects/ProjectListModal";
 import DeleteCommunity from "../../pages/communities/DeleteCommunity";
 import LeaveCommunity from "../../pages/communities/LeaveCommunity";
 import JoinCommunity from "../../pages/communities/JoinCommunity";
+import ParticipantsModal from "../../pages/communities/ParticipantsModal";
 const { Title, Text } = Typography;
 
 const CommunityItem = () => {
@@ -57,15 +58,8 @@ const CommunityItem = () => {
         </Title>
       </Row>
       <Row gutter={[16, 16]}>
-        <Col span={5} >
-          <Title level={5}>
-            <Text>
-              <span style={{marginRight: '10px'}}>Participants</span>
-              <span style={{outline: 'solid', borderRadius: '2rem', padding: '5px'}}>
-                {getLength(community.participants)}
-              </span>
-            </Text>
-          </Title>
+        <Col span={5} style={{marginBottom: '20px'}}>
+          <ParticipantsModal communityId={communityId} participantsCount={getLength(community.participants)}/>
         </Col>
         <Col span={5} >
           {participationAction(community)}
