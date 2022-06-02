@@ -3,7 +3,7 @@ import {Modal, Button} from 'antd';
 import axios from "axios";
 import ParticipantsTable from "./ParticipantsTable";
 
-const ParticipantsModal = ({ communityId, participantsCount }) => {
+const ParticipantsModal = ({ communityId, participantsCount, userParticipation }) => {
   const [visible, setVisible] = useState(false);
 
   const switchModal = () => {
@@ -28,7 +28,7 @@ const ParticipantsModal = ({ communityId, participantsCount }) => {
         onCancel={handleCancel}
         footer={null}
       >
-        <ParticipantsTable communityId={communityId}/>
+        <ParticipantsTable communityId={communityId} userParticipation={userParticipation}/>
       </Modal>
     </>
   );
