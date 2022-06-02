@@ -13,7 +13,7 @@ const AuthenticationModal = () => {
   return (
     <>
       <Button type="primary" onClick={switchModal} style={{marginRight: 20}}>
-        sign in
+        Sign in
       </Button>
       <Modal
         visible={visible}

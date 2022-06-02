@@ -1,4 +1,5 @@
 import { Button, Modal } from 'antd';
+import {PlusOutlined} from "@ant-design/icons";
 import { useState } from 'react';
 import CreateCommunityForm from "./CreateCommunityForm";
 
@@ -12,7 +13,8 @@ const CreateCommunityModal = () => {
   return (
     <>
       <Button type="primary" onClick={switchModal}>
-        Create community
+        <PlusOutlined />
+        <span>Create community</span>
       </Button>
       <Modal
         visible={visible}
