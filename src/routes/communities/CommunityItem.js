@@ -3,10 +3,10 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 import {Col, message, Row, Typography} from "antd";
 import ProjectListModal from "../../pages/projects/ProjectListModal";
-import DeleteCommunity from "../../pages/communities/DeleteCommunity";
 import LeaveCommunity from "../../pages/communities/LeaveCommunity";
 import JoinCommunity from "../../pages/communities/JoinCommunity";
 import ParticipantsModal from "../../pages/communities/ParticipantsModal";
+import CreateProjectModal from "../../pages/projects/CreateProjectModal";
 const { Title, Text } = Typography;
 
 const CommunityItem = () => {
@@ -81,11 +81,11 @@ const CommunityItem = () => {
       </Row>
       <Row gutter={[16, 16]}>
         <Col span={5}>
-          <ProjectListModal communityId={communityId}/>
+          <ProjectListModal communityId={communityId} userParticipation={userParticipation}/>
         </Col>
         {community.auth_user_is_creator && (
           <Col span={5}>
-            Я СОЗДАТЕЛЬ
+            <CreateProjectModal communityId={communityId} switchUserParticipation={switchUserParticipation}/>
           </Col>
         )}
       </Row>
