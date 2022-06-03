@@ -4,12 +4,12 @@ import axios from "axios";
 import {Link, useParams} from "react-router-dom";
 
 const ProjectList = (props) => {
-  const {communityId} = props
+  const {communityId, userParticipation} = props
   const [projects, setProjects] = useState([])
   useEffect(() => {
     axios.get(`http://localhost:8000/api/projects/communities/${communityId}`)
       .then(res => setProjects(res.data))
-  }, [communityId])
+  }, [communityId, userParticipation])
 
 
   const columns = [

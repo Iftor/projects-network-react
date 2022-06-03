@@ -2,8 +2,8 @@ import { Button, Modal } from 'antd';
 import { useState } from 'react';
 import ProjectList from "./ProjectList";
 
-const CreateCommunityModal = (props) => {
-  const {communityId} = props
+const ProjectListModal = (props) => {
+  const {communityId, userParticipation} = props
   const [visible, setVisible] = useState(false);
 
   const switchModal = () => {
@@ -17,16 +17,15 @@ const CreateCommunityModal = (props) => {
       </Button>
       <Modal
         visible={visible}
-        title="Create community"
+        title="Projects"
         onCancel={switchModal}
-        onOk={switchModal}
         footer={null}
       >
-        <ProjectList communityId={communityId}/>
+        <ProjectList communityId={communityId} userParticipation={userParticipation}/>
       </Modal>
     </>
   );
 };
 
 
-export default CreateCommunityModal;
+export default ProjectListModal;
