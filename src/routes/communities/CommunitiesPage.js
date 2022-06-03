@@ -56,7 +56,7 @@ const CommunitiesPage = () => {
         className="site-page-header"
         title={<Title level={2}>Communities</Title>}
         extra={[
-          <CreateCommunityModal />
+          <CreateCommunityModal switchUserParticipation={switchUserParticipation}/>
         ]}
       />
       <List>

@@ -10,11 +10,15 @@ const DeleteCommunity = ({ communityId, switchUserParticipation }) => {
 
   return (
     <>
-      <Popconfirm title="Are you sure？" okText="Yes" cancelText="No">
+      <Popconfirm
+          title="Are you sure？"
+          okText="Yes"
+          cancelText="No"
+          onConfirm={deleteCommunity}
+      >
         <Button
           type="primary"
           danger
-          onClick={deleteCommunity}
         >
           Delete
         </Button>
