@@ -9,7 +9,7 @@ import LeaveCommunity from "../../pages/communities/LeaveCommunity";
 import DeleteCommunity from "../../pages/communities/DeleteCommunity";
 const { Title } = Typography;
 
-const ContainerHeight = 400;
+const ContainerHeight = window.screen.height - 450;
 
 const CommunitiesPage = () => {
   const [communities, setCommunities] = useState([])
@@ -62,10 +62,10 @@ const CommunitiesPage = () => {
       <List>
         <VirtualList
           data={communities}
-          height={ContainerHeight}
           itemHeight={47}
           itemKey="custom_id"
           onScroll={onScroll}
+          height={ContainerHeight}
         >
           {(item) => (
             <List.Item key={item.id}>
