@@ -2,12 +2,13 @@ import {Button, Checkbox, Form, Input, message} from 'antd';
 import axios from "axios";
 
 const CreateCommunityForm = (props) => {
-  const { switchModal } = props
+  const { switchModal, switchUserParticipation } = props
   const onFinish = (values) => {
     axios.post('http://localhost:8000/api/communities/', values)
       .then(() => {
         message.success('Success')
         switchModal()
+        switchUserParticipation()
       })
       .catch(() => message.error('Something\'s wrong'))
   };

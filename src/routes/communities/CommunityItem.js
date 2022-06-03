@@ -67,21 +67,27 @@ const CommunityItem = () => {
           </Text>
         </Title>
       </Row>
-      <Row gutter={[16, 16]}>
-        <Col span={5} style={{marginBottom: '20px'}}>
+      <Row gutter={[16, 16]} style={{marginBottom: '20px'}}>
+        <Col span={5}>
           <ParticipantsModal
             communityId={communityId}
             participantsCount={getLength(community.participants)}
             userParticipation={userParticipation}
           />
         </Col>
-        <Col span={5} >
+        <Col span={5}>
           {participationAction(community)}
         </Col>
       </Row>
-
-      <Row>
-        <ProjectListModal communityId={communityId}/>
+      <Row gutter={[16, 16]}>
+        <Col span={5}>
+          <ProjectListModal communityId={communityId}/>
+        </Col>
+        {community.auth_user_is_creator && (
+          <Col span={5}>
+            Я СОЗДАТЕЛЬ
+          </Col>
+        )}
       </Row>
     </>
   )

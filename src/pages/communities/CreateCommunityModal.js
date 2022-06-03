@@ -3,7 +3,7 @@ import {PlusOutlined} from "@ant-design/icons";
 import { useState } from 'react';
 import CreateCommunityForm from "./CreateCommunityForm";
 
-const CreateCommunityModal = () => {
+const CreateCommunityModal = ({switchUserParticipation}) => {
   const [visible, setVisible] = useState(false);
 
   const switchModal = () => {
@@ -23,7 +23,7 @@ const CreateCommunityModal = () => {
         onOk={switchModal}
         footer={null}
       >
-        <CreateCommunityForm switchModal={switchModal}/>
+        <CreateCommunityForm switchModal={switchModal} switchUserParticipation={switchUserParticipation}/>
       </Modal>
     </>
   );
