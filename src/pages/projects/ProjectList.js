@@ -7,7 +7,7 @@ const ProjectList = (props) => {
   const {communityId, userParticipation} = props
   const [projects, setProjects] = useState([])
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/projects/communities/${communityId}`)
+    axios.get(`http://localhost:8000/api/projects/communities/${communityId}/project-list`)
       .then(res => setProjects(res.data))
   }, [communityId, userParticipation])
 
