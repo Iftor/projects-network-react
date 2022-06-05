@@ -10,11 +10,10 @@ const ProjectItem = () => {
   let { communityId, projectId } = useParams()
   const [project, setProject] = useState({})
   useEffect(() => {
-    axios.get(`http://localhost:8000/api/projects/communities/${projectId}`)
+    axios.get(`http://localhost:8000/api/projects/${projectId}`)
       .then(res => setProject(res.data))
       .catch(() => message.error('Failed to load data'))
   }, [communityId, projectId])
-
 
   return (
     <>

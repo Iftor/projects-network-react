@@ -1,9 +1,9 @@
 import {Button, Modal} from 'antd';
 import {PlusOutlined} from "@ant-design/icons";
 import {useState} from 'react';
-import CreateProjectForm from "./CreateProjectForm";
+import CreateTaskForm from "./CreateTaskForm";
 
-const CreateProjectModal = ({communityId, switchUserParticipation}) => {
+const CreateTaskModal = ({projectId, switchUserParticipation}) => {
   const [visible, setVisible] = useState(false);
 
   const switchModal = () => {
@@ -14,17 +14,17 @@ const CreateProjectModal = ({communityId, switchUserParticipation}) => {
     <>
       <Button type="primary" onClick={switchModal} ghost>
         <PlusOutlined/>
-        <span>Create project</span>
+        <span>Create task</span>
       </Button>
       <Modal
         visible={visible}
-        title="Create project"
+        title="Create task"
         onCancel={switchModal}
         footer={null}
       >
-        <CreateProjectForm
+        <CreateTaskForm
+          projectId={projectId}
           switchModal={switchModal}
-          communityId={communityId}
           switchUserParticipation={switchUserParticipation}
         />
       </Modal>
@@ -33,4 +33,4 @@ const CreateProjectModal = ({communityId, switchUserParticipation}) => {
 };
 
 
-export default CreateProjectModal;
+export default CreateTaskModal;
